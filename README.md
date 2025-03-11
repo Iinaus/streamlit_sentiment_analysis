@@ -19,6 +19,8 @@ With this exercise we practiced:
 - Developing and deploying a machine learning-based web application using Streamlit
 - Handling text data and implementing machine learning workflows
 - Enhancing the user experience with interactive UI elements
+- Cloud-based deployment of the application for easy accessibility
+- Managing development using Git and branching strategies to ensure efficient collaboration and code deployment
 
 ### Key Features
 - **User Input**: Users can type a sentence into a text box, and the app will predict its sentiment.
