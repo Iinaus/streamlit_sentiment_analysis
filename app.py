@@ -20,10 +20,26 @@ text_clf = Pipeline([
 
 text_clf.fit(x_train, y_train)
 
-result = text_clf.predict(['Hate it'])
-st.write(result)
-
 st.write("""
 # Sentiment Analysis
-Write a sentance to evaluate.
 """)
+
+st.text_input("Enter a sentence:", key="user_input")
+
+if st.session_state.user_input:
+    sentiment = text_clf.predict([st.session_state.user_input])
+    sentiment_label = sentiment[0]
+
+    sentiment_styles = {
+        'positive': {'color': 'white', 'background_color': 'green'},
+        'negative': {'color': 'white', 'background_color': 'red'},
+        'neutral': {'color': 'black', 'background_color': 'yellow'}
+    }
+
+    style = sentiment_styles.get(sentiment_label, {'color': 'black', 'background_color': 'gray'}) #default colors if sentiment_label is not found
+
+    st.markdown(
+        f'<p style="background-color: {style["background_color"]}; color: {style["color"]}; padding: 10px;">'
+        f'The sentence was evaluated as {sentiment_label}.</p>',
+        unsafe_allow_html=True
+    )
