@@ -29,10 +29,19 @@ text_clf.fit(x_train, y_train)
 
 st.write("""
 # Sentiment Analysis
+Sentiment Analysis is a process of determining the emotional tone behind a piece 
+of text. It is widely used to understand people's opinions, attitudes, or 
+feelings toward a topic, product, or service based on written data. 
+The analysis categorizes text into three main sentiment labels: positive, negative, neutral.
+
+This tool uses machine learning models to analyze user input and classify it into 
+these categories, providing real-time feedback in an intuitive and user-friendly interface.
 """)
 
+st.divider()
+
 # Create a text input widget for user input
-st.text_input("Enter a sentence:", key="user_input")
+st.text_input("Enter a sentence to be evaluated:", key="user_input")
 
 if st.session_state.user_input:
     # Predict sentiment for the entered sentence
