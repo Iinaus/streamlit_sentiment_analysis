@@ -5,27 +5,34 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 
-# Load the training data from a CSV file
-df = pd.read_csv('train.csv', encoding='latin1')
+@st.cache_resource
+def train_model():
+    # Load the training data from a CSV file
+    df = pd.read_csv('train.csv', encoding='latin1')
 
-# Remove missing values in the dataset
-df.dropna(inplace=True)
+    # Remove missing values in the dataset
+    df.dropna(inplace=True)
 
-# Define the input features (X) and target variable (y)
-x = df['selected_text']
-y = df['sentiment']
+    # Define the input features (X) and target variable (y)
+    x = df['selected_text']
+    y = df['sentiment']
 
-# Split the data into training and test sets
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.01, random_state=42)
+    # Split the data into training and test sets
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.01, random_state=42)
 
-# Create a machine learning pipeline
-text_clf = Pipeline([
-    ('tfidf', TfidfVectorizer()),
-    ('clf', LinearSVC())
-])
+    # Create a machine learning pipeline
+    text_clf = Pipeline([
+        ('tfidf', TfidfVectorizer()),
+        ('clf', LinearSVC())
+    ])
 
-# Train the model using the training data
-text_clf.fit(x_train, y_train)
+    # Train the model using the training data
+    text_clf.fit(x_train, y_train)
+
+    return text_clf
+
+# Train or load the model (this is cached)
+text_clf = train_model()
 
 st.write("""
 # Sentiment Analysis
