@@ -38,10 +38,10 @@ This tool uses machine learning models to analyze user input and classify it int
 these categories, providing real-time feedback in an intuitive and user-friendly interface.
 """)
 
-st.divider()
-
-# Create a text input widget for user input
-st.text_input("Enter a sentence to be evaluated:", key="user_input")
+# Create a form widget for user input
+form = st.form("user_input")
+form.text_input("Enter a sentence to be evaluated:", key="user_input")
+form.form_submit_button("Evaluate")
 
 if st.session_state.user_input:
     # Predict sentiment for the entered sentence
